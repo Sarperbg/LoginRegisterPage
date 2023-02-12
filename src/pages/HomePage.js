@@ -1,28 +1,64 @@
-import React from "react";
 import Table from "../components/Table";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {useState} from "react";
+
 const HomePage = () => {
-  const [dataTable, setDataTable] = useState([]);
-
-  useEffect(() => {
-    axios("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setDataTable(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  const column = [
-    { heading: "CompanyName", value: "name" },
-    { heading: "CompanyEmail", value: "email" },
-    { heading: "CompanyPhone", value: "phone" },
-    { heading: "CompanyCity", value: "address.city" },
-  ];
+  
+  const [users, setUsers] = useState(() => [
+		{
+			name: 'Tayfun',
+			surname: 'Erbilen',
+			email: 'te@gmail.com',
+			age: 29
+		},
+		{
+			name: 'Mehmet',
+			surname: 'Seven',
+			email: 'mseven@gmail.com',
+			age: 29
+		},
+		{
+			name: 'Gökhan',
+			surname: 'Kandemir',
+			email: 'gkandemir@gmail.com',
+			age: 35
+		},
+		{
+			name: 'Ahmet',
+			surname: 'Tarık G.',
+			email: 'atg@gmail.com',
+			age: 24
+		}
+	])
 
   return (
     <div>
-      <h1>Dynamic Table</h1>
-      <Table data={dataTable} column={column} />{" "}
+   
+      <Table
+        searchable={true}
+        head={[
+          {name : 'Ad-Soyad', sortable: true},
+          {name : 'E-posta'},
+          {name : 'Yas', sortable: true},
+          {name: 'İslemler'}
+        ]}
+        body={users.map((user,key) => ([
+          <div key={`${user.name} ${user.surname}`}>{user.name} {user.surname}</div>,
+					user.email,
+					<div searchableText={`Yaş ${user.age}`}>{user.age}</div>,
+        [
+          <div>
+          <button className="btn btn-primary btn-lg btn-block text-center m-2">Düzenle</button>,
+          <button onClick={()=> {
+            const tmpUsers = [...users]
+            tmpUsers.splice(key, 1)
+            setUsers(tmpUsers)
+          }} className="btn btn-danger btn-lg btn-block text-center m-2">Sil</button>
+          </div>
+        ]
+      ]))}
+      />
     </div>
+   
   );
 };
 
