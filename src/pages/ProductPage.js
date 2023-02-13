@@ -1,7 +1,7 @@
 import Table from "../components/CompanyTable";
 import {useState} from "react";
 
-const HomePage = () => {
+const ProductPage = () => {
   
   const [company, setCompany] = useState(() => [
 		{
@@ -36,10 +36,10 @@ const HomePage = () => {
       <Table
         searchable={true}
         head={[
-          {name : 'Company Name', sortable: true},
-          {name : 'Incorporation Country', sortable: true},
-          {name : 'Company Legal Number', sortable: true},
-          {name: 'Website', sortable: true}
+          {name : 'Product 1', sortable: true},
+          {name : 'Product 2', sortable: true},
+          {name : 'Product 3', sortable: true},
+          {name: 'Product 4', sortable: true}
         ]}
         body={company && company.map((company,key) => ([
           <div key={`${company.companyName} ${company.IncorporationCountry}`}>{company.companyName} {company.IncorporationCountry}</div>,
@@ -58,8 +58,9 @@ const HomePage = () => {
       ]))}
       />
     </div>
+    
    
   );
 };
 
-export default HomePage;
+export default ProductPage;

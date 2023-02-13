@@ -4,6 +4,7 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
                 <Route path="/sign-in" element={<LoginPage />} />
                 <Route path="/register-up" element={<RegisterPage />} />
                 <Route path="/homepage" element={<HomePage />} />
+                <Route path="/productpage" element={<ProductPage />} />
+
               </Routes>
             </div>
           </div>
