@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
 import { useMediaQuery } from "@react-hook/media-query";
 import MobilePhone from "./MobilePhone";
+import { Pagination } from "antd";
+
 export default function Table({ head, body, searchable }) {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
@@ -64,7 +66,7 @@ export default function Table({ head, body, searchable }) {
           {sorting && (
             <button
               onClick={() => setSorting(false)}
-              className="btn btn-outline-danger btn-sm m-4 "
+              className="btn btn-outline-danger btn-sm m-4"
             >
               Siralamayi iptal et
             </button>
@@ -79,10 +81,11 @@ export default function Table({ head, body, searchable }) {
               <tr>
                 {head.map((h, key) => (
                   <th key={key}>
-                    <div className="d-flex text-center m-2">
+                    <div className="d-flex text-center mt-2">
                       {h.name}
                       {h.sortable && (
                         <button
+                        className="mx-auto"
                           onClick={() => {
                             if (sorting?.key === key) {
                               setSorting({
@@ -98,9 +101,10 @@ export default function Table({ head, body, searchable }) {
                             }
                           }}
                         >
-                          {sorting?.key === key &&
+                          {sorting?.key === key &&                             
                             (sorting.orderBy === "asc" ? (
-                              <FaSortDown size={14} />
+                              <FaSortDown size={14} 
+                              />
                             ) : (
                               <FaSortUp size={14} />
                             ))}
@@ -127,25 +131,7 @@ export default function Table({ head, body, searchable }) {
           </table>
 
           <div>
-            <nav aria-label="...">
-              <ul className="pagination pagination-lg">
-                <li className="page-item disabled">
-                  <a className="page-link" href="#" tabindex="-1">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    3
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <Pagination defaultCurrent={1} total={60} />
           </div>
 
           <div>

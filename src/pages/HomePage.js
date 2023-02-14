@@ -1,5 +1,6 @@
-import Table from "../components/CompanyTable";
+import Table from "../apps/profile/components/CompanyTable";
 import {useState} from "react";
+import { Pagination } from 'antd';
 
 const HomePage = () => {
   
@@ -27,7 +28,13 @@ const HomePage = () => {
 			IncorporationCountry: 'Germany',
 			CompanyLegalNumber:'volkswagen@gmail.com',
 			Website: 'www.volkswagen.com'
-		}
+		},
+    {
+      companyName: 'Microsoft',
+			IncorporationCountry: 'USA',
+			CompanyLegalNumber:'microsoft@gmail.com',
+			Website: 'www.microsoft.com'
+		},
 	])
 
   return (

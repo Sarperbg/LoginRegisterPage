@@ -1,4 +1,4 @@
-import Table from "../components/CompanyTable";
+import Table from "../apps/profile/components/CompanyTable";
 import {useState} from "react";
 
 const ProductPage = () => {
