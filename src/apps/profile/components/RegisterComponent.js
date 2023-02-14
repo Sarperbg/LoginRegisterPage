@@ -87,6 +87,7 @@ const RegisterComponent = () => {
           (" ")}
           onClick={(e)=> {
             e.preventDefault()
+            navigate("/auth/homepage")
             register(firstName, lastName, email, password)
           }}
         >Register</button>
