@@ -21,8 +21,8 @@ function App() {
     return (
       <Router>
         <Routes>
-          <Route path="/*" element={<Navigate to={"auth"} />} />
-          <Route path="/auth/*" element={<PublicRoutes />} />
+          <Route path="/*" element={<Navigate to={'auth'} />} />
+          <Route path="auth/*" element={<PublicRoutes />} />
         </Routes>
       </Router>
     );

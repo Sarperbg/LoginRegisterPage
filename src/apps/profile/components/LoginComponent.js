@@ -1,5 +1,6 @@
 import React from "react";
 import FirebaseContext from "../../../context/FirebaseContext";
+
 import { useContext, useState } from "react";
 import styles from "../styles/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ import design from '../../../assets/banners/design.jpg'
 const LoginComponent = () => {
   const navigate = useNavigate();
   const { register } = useContext(FirebaseContext);
+  const {signIn} = useContext(FirebaseContext);
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
   return (
@@ -30,20 +32,27 @@ const LoginComponent = () => {
           </div>
             <form>
               <div className={styles.form_control}>
-                <input type="email" name="user_email" placeholder="Email" />
+                <input type="email"
+                 name="user_email"
+                  placeholder="Email" 
+                  onChange = {(e) => setEmail(e.target.value)
+                  }
+                  />
               </div>
               <div className={styles.form_control}>
                 <input
                   type="password"
                   name="user_password"
                   placeholder="Password"
+                  onChange = {(e) => setPassowrd(e.target.value)
+                  }
                 />
               </div>
               <button
        className={[styles.login_btn, styles.btn].join(" ")}
         onClick={(e) => {
                   e.preventDefault();
-                  navigate("/auth/register");
+                  signIn(email, password)
                 }}
               >
                 Sign In

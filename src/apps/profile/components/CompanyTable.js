@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
 import { useMediaQuery } from "@react-hook/media-query";
 import MobilePhone from "./MobilePhone";
 import { Pagination } from "antd";
+import FirebaseContext from "../../../context/FirebaseContext";
 
+import styles from "../styles/companyTable.module.css";
 export default function Table({ head, body, searchable }) {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(2);
+
+  const navigate = useNavigate();
+  const { register } = useContext(FirebaseContext);
 
   const [sorting, setSorting] = useState(false);
   const [search, setSearch] = useState("");
@@ -53,16 +59,25 @@ export default function Table({ head, body, searchable }) {
   }
 
   return (
-    <>
+    <div className={styles.companyTable_container}>
       {searchable && (
-        <div>
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            type="text"
-            placeholder="Search"
-            className="input-group-prepend "
-          />
+        <div className={styles.main_container}>
+          <div class="input-group">
+            <div class="form-outline">
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Search"
+                className="input-group-prepend "
+              />{" "}
+              <label class="form-label" for="form1"></label>
+              <button type="button" class="btn btn-primary">
+                <i className="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+
           {sorting && (
             <button
               onClick={() => setSorting(false)}
@@ -85,7 +100,7 @@ export default function Table({ head, body, searchable }) {
                       {h.name}
                       {h.sortable && (
                         <button
-                        className="mx-auto"
+                          className="mx-auto"
                           onClick={() => {
                             if (sorting?.key === key) {
                               setSorting({
@@ -101,10 +116,9 @@ export default function Table({ head, body, searchable }) {
                             }
                           }}
                         >
-                          {sorting?.key === key &&                             
+                          {sorting?.key === key &&
                             (sorting.orderBy === "asc" ? (
-                              <FaSortDown size={14} 
-                              />
+                              <FaSortDown size={14} />
                             ) : (
                               <FaSortUp size={14} />
                             ))}
@@ -135,14 +149,20 @@ export default function Table({ head, body, searchable }) {
           </div>
 
           <div>
-            <button type="submit" className="btn btn-primary">
-              <a href="/productpage" className="btn-submit">
-                Go to products page
-              </a>
+            <button
+              type="submit"
+              className="btn btn-primary m-4"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/productpage");
+              }}
+            >
+              Go to Product Page
             </button>{" "}
+           
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

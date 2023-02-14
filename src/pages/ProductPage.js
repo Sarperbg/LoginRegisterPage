@@ -1,65 +1,87 @@
-import Table from "../apps/profile/components/CompanyTable";
-import {useState} from "react";
+import CompanyTable from "../apps/profile/components/CompanyTable";
+import { useState } from "react";
+import { Pagination } from "antd";
 
 const ProductPage = () => {
   
-  const [company, setCompany] = useState(() => [
-		{
-			companyName: 'Amazon',
-			IncorporationCountry: 'USA',
-			CompanyLegalNumber:'amazon@gmail.com',
-			Website: 'www.amazon.com'
+  const [users, setUsers] = useState(() => [
+    {
+      ProductName: 'İphone 14',
+      ProductCategory : 'Telephone',
+			ProductAmount:'100',
+			AmountUnit: "50.000 TL",
+      Company: 'USA'
 		},
 		{
-      companyName: 'Apple',
-			IncorporationCountry: 'USA',
-			CompanyLegalNumber:'apple@gmail.com',
-			Website: 'www.apple.com'
+      ProductName: 'Dell',
+			ProductCategory: 'Computer',
+			ProductAmount:'5000',
+			AmountUnit: '30.000TL',
+      Company: 'England'
+
 		},
 		{
-      companyName: 'Shell',
-			IncorporationCountry: 'England',
-			CompanyLegalNumber:'shell@gmail.com',
-			Website: 'www.shell.com'
+      ProductName: 'Marti',
+			ProductCategory: 'Scooter',
+			ProductAmount:'100000',
+			AmountUnit: '40.000TL',
+      Company: 'Turkey'
+
 		},
 		{
-      companyName: 'Volkswagen',
-			IncorporationCountry: 'Germany',
-			CompanyLegalNumber:'volkswagen@gmail.com',
-			Website: 'www.volkswagen.com'
+      ProductName: 'Airfryer',
+			ProductCategory: 'Kitchen',
+			ProductAmount:'12500',
+			AmountUnit: '10.000TL',
+      Company: 'USA'
+
 		}
-	])
+    
+  ]);
 
   return (
-    <div>
-   
-      <Table
+    <div className="p-4">
+      <CompanyTable
         searchable={true}
         head={[
-          {name : 'Product 1', sortable: true},
-          {name : 'Product 2', sortable: true},
-          {name : 'Product 3', sortable: true},
-          {name: 'Product 4', sortable: true}
+          {name : 'Product Name', sortable: true},
+          { name: "Product Category", sortable: true  },
+          { name: "Product Amount"},
+          {name: 'AmountUnit', sortable: true},
+          {name: 'Company', sortable: true}
+
         ]}
-        body={company && company.map((company,key) => ([
-          <div key={`${company.companyName} ${company.IncorporationCountry}`}>{company.companyName} {company.IncorporationCountry}</div>,
-					company.CompanyLegalNumber,
-					<div searchableText={`Website ${company.Website}`}>{company.Website}</div>,
-        [
-          <div>
-          <button className="btn btn-primary btn-lg btn-block text-center m-2">Düzenle</button>,
-          <button onClick={()=> {
-            const tmpCompany = [...company]
-            tmpCompany.splice(key, 1)
-            setCompany(tmpCompany)
-          }} className="btn btn-danger btn-lg btn-block text-center m-2">Sil</button>
-          </div>
-        ]
-      ]))}
+        body={
+          users &&
+          users.map((user, key) => [
+            user.ProductName,
+            user.ProductCategory,
+            user.ProductAmount,
+            user.AmountUnit,
+            user.Company,
+            [
+              <div>
+                <button className="btn btn-primary btn-lg btn-block text-center m-2">
+                  Düzenle
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const tmpUsers = [...users];
+                    tmpUsers.splice(key, 1);
+                    setUsers(tmpUsers);
+                  }}
+                  className="btn btn-danger btn-lg btn-block text-center m-2"
+                >
+                  Sil
+                </button>
+                
+              </div>
+            ],
+          ])
+        }
       />
     </div>
-    
-   
   );
 };
 
