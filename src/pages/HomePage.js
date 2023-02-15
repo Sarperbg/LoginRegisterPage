@@ -1,9 +1,11 @@
 import CompanyTable from "../apps/profile/components/CompanyTable";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Pagination } from "antd";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 const HomePage = () => {
-  
+  const navigate = useNavigate();
+
   const [users, setUsers] = useState(() => [
     {
 			companyName: 'Amazon',
@@ -38,6 +40,10 @@ const HomePage = () => {
    
   ]);
 
+ 
+  const handleExport = () => {
+    console.log(users);
+  }
   return (
     <div className="p-4">
       <CompanyTable
@@ -71,12 +77,18 @@ const HomePage = () => {
                 >
                   Sil
                 </button>
-                
+                <button
+              type="submit"
+              className="btn btn-primary m-4"
+              onClick={handleExport}>        
+              Export Excel 
+            </button>  
               </div>
             ],
           ])
         }
       />
+       
     </div>
   );
 };

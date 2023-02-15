@@ -15,7 +15,7 @@ export default function Table({ head, body, searchable }) {
 
   const navigate = useNavigate();
   const { register } = useContext(FirebaseContext);
-
+  
   const [sorting, setSorting] = useState(false);
   const [search, setSearch] = useState("");
   const filteredData =
@@ -159,7 +159,7 @@ export default function Table({ head, body, searchable }) {
             >
               Go to Product Page
             </button>{" "}
-           
+            
           </div>
         </div>
       )}

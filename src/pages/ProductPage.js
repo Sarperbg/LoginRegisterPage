@@ -1,9 +1,12 @@
 import CompanyTable from "../apps/profile/components/CompanyTable";
+
 import { useState } from "react";
 import { Pagination } from "antd";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 const ProductPage = () => {
-  
+  const navigate = useNavigate();
+
   const [users, setUsers] = useState(() => [
     {
       ProductName: 'İphone 14',
@@ -75,12 +78,23 @@ const ProductPage = () => {
                 >
                   Sil
                 </button>
-                
+               
               </div>
             ],
           ])
+        
         }
       />
+       <button
+              type="submit"
+              className="btn btn-primary m-4"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/homepage");
+              }}
+            >
+              Go to Company Page
+            </button>
     </div>
   );
 };
